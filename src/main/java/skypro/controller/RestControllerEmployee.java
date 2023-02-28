@@ -1,9 +1,6 @@
 package skypro.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import skypro.entity.Employee;
 import skypro.service.EmployeeService;
 
@@ -27,6 +24,29 @@ public class RestControllerEmployee {
     @GetMapping("/employees/{id}")
     public Employee getEmployeeById(@PathVariable int id) {
         return employeeService.getEmployeeById(id);
+    }
+    @PostMapping("/employees")
+    public Employee addEmployee(@RequestBody Employee employee) {
+
+        employeeService.addEmployee(employee);
+        return employee;
+
+    }
+
+    @PutMapping("/employees")
+    public Employee updateEmployee(@RequestBody Employee employee) {
+
+        employeeService.updateEmployee(employee);
+        return employee;
+
+    }
+
+    @DeleteMapping("/employees/{id}")
+    public String deleteEmployee(@PathVariable int id) {
+
+        employeeService.deleteEmployee(id);
+        return "Employee with id = " + id + " was deleted";
+
     }
 
 }
